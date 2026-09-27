@@ -1,6 +1,6 @@
 {
   "name": "@nivalos/lithium.js",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Creating a proxy has never been easier with Lithium.js",
   "type": "module",
   "main": "server/index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nivalox/Lithium.js.git"
+    "url": "git+https://github.com/Lithium-Foundry/Lithium.js.git"
   },
   "publishConfig": {
     "access": "public"
