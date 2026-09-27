@@ -46,7 +46,7 @@ jobs:
         run: |
           PKG_VERSION="$(node -p "require('./package.json').version")"
           TAG="${{ github.event.release.tag_name }}"
-          TAG_VERSION="${TAG#v}"
+          TAG_VERSION="${TAG}"
           if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
             echo "package.json version is $PKG_VERSION but the release tag is $TAG - bump package.json and re-tag before publishing."
             exit 1
