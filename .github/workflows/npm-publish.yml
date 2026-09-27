@@ -9,12 +9,7 @@ name: Publish to npm
 #      (Automation tokens work in CI even with 2FA enabled on your account).
 #   2. Add it as a repo secret named NPM_TOKEN:
 #      Settings -> Secrets and variables -> Actions -> New repository secret.
-#
-# To cut a release:
-#   1. Bump "version" in package.json (e.g. 1.1.0 -> 1.1.1) and commit it.
-#   2. git tag v1.1.1 && git push origin v1.1.1
-#   3. On GitHub: Releases -> Draft a new release -> pick the v1.1.1 tag -> Publish.
-#   This workflow then checks the tag matches package.json's version and publishes.
+
 
 on:
   release:
@@ -44,9 +39,10 @@ jobs:
       - name: Check package.json version matches the release tag
         if: github.event_name == 'release'
         run: |
-          PKG_VERSION="v$(node -p "require('./package.json').version")"
+          PKG_VERSION="$(node -p "require('./package.json').version")"
           TAG="${{ github.event.release.tag_name }}"
-          if [ "$PKG_VERSION" != "$TAG" ]; then
+          TAG_VERSION="${TAG#v}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
             echo "package.json version is $PKG_VERSION but the release tag is $TAG - bump package.json and re-tag before publishing."
             exit 1
           fi
